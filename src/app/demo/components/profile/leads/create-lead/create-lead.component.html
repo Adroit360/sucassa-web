@@ -1,0 +1,89 @@
+<div>
+    <app-topbar></app-topbar>
+    <div class="profile-container mx-5">
+        <div class="col-12 card">
+            <h2>Add Lead</h2>
+            <div class="p-fluid p-formgrid grid">
+                <div class="field col-12 md:col-4">
+                    <label htmlFor="firstname2">Title</label>
+                    <input
+                        pInputText
+                        id="firstname2"
+                        [(ngModel)]="firstName"
+                        type="text"
+                    />
+                </div>
+                <div class="field col-12 md:col-4">
+                    <label htmlFor="firstname2">Firstname</label>
+                    <input
+                        pInputText
+                        id="firstname2"
+                        [(ngModel)]="firstName"
+                        type="text"
+                    />
+                </div>
+                <div class="field col-12 md:col-4">
+                    <label htmlFor="lastname2">Lastname</label>
+                    <input
+                        pInputText
+                        id="lastname2"
+                        [(ngModel)]="lastName"
+                        type="text"
+                    />
+                </div>
+                <div class="field col-12 md:col-4">
+                    <label htmlFor="lastname2">Other Names</label>
+                    <input
+                        pInputText
+                        id="lastname2"
+                        [(ngModel)]="otherNames"
+                        type="text"
+                    />
+                </div>
+
+                <div class="field col-12 md:col-4">
+                    <label htmlFor="lastname2">Email</label>
+                    <input
+                        pInputText
+                        id="lastname2"
+                        [(ngModel)]="email"
+                        type="text"
+                    />
+                </div>
+                <div class="col-10 md:col-4">
+                    <label htmlFor="lastname2">Country</label>
+
+                    <p-dropdown
+                        [options]="countries"
+                        [(ngModel)]="selectedCountry"
+                        optionLabel="name"
+                        [filter]="true"
+                        filterBy="name"
+                    >
+                        <ng-template pTemplate="selectedItem">
+                            <div
+                                class="country-item country-item-value"
+                                *ngIf="selectedCountry"
+                            >
+                                <div>{{ selectedCountry.country }}</div>
+                            </div>
+                        </ng-template>
+                        <ng-template let-country pTemplate="item">
+                            <div class="country-item">
+                                <div>{{ country.country }}</div>
+                            </div>
+                        </ng-template>
+                    </p-dropdown>
+                </div>
+            </div>
+        </div>
+
+        <ng-template pTemplate="footer">
+            <p-button
+                (click)="onCreateLead()"
+                label="Submit"
+                class="p-button-text"
+            ></p-button>
+        </ng-template>
+    </div>
+</div>

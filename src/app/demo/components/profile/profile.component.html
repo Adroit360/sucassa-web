@@ -1,1 +1,113 @@
-<app-topbar></app-topbar>
+<div>
+    <app-topbar></app-topbar>
+    <div class="profile-container">
+        <div class="h-full px-4 py-4 bg-white w-23rem">
+            <div class="mt-8 h-full" *ngIf="loading">
+                <p-progressSpinner></p-progressSpinner>
+            </div>
+            <div *ngIf="!loading">
+                <div
+                    class="px-2 py-5 flex justify-content-center flex-column w-full text-center border-bottom-1 border-gray-500"
+                >
+                    <ngx-avatar
+                        class="flex align-items-center justify-content-center"
+                        [name]="name"
+                        size="120"
+                    ></ngx-avatar>
+                    <h3>{{ name }}</h3>
+                    <p>{{ contact.phone }} | {{ contact.country }}</p>
+                    <p>{{ contact.email }}</p>
+                </div>
+                <div></div>
+                <div class="py-5">
+                    <div
+                        class="flex py-2 my-2 align-items-center cursor-pointer justify-content-between"
+                        [routerLink]="['/add-lead', contact._id]"
+                    >
+                        <span>Leads</span>
+                        <i
+                            class="pi pi-angle-right"
+                            style="font-size: 2rem"
+                        ></i>
+                    </div>
+
+                    <div
+                        class="flex py-2 my-2 align-items-center cursor-pointer justify-content-between"
+                    >
+                        <span>Properties</span>
+                        <i
+                            class="pi pi-angle-right"
+                            style="font-size: 2rem"
+                        ></i>
+                    </div>
+
+                    <div
+                        class="flex py-2 my-2 align-items-center cursor-pointer justify-content-between"
+                    >
+                        <span>Partnership</span>
+                        <span>{{ contact.isPartnership }}</span>
+                    </div>
+                    <div
+                        class="flex py-2 my-2 align-items-center cursor-pointer justify-content-between"
+                    >
+                        <span>Business</span>
+                        <span>{{ contact.business }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="h-full px-4 relative flex-1">
+            <div class="absolute top-0 z-5">
+                <p-tabMenu
+                    [model]="items"
+                    [activeItem]="activeMenu"
+                ></p-tabMenu>
+            </div>
+            <div
+                class="mt-8 h-full flex justify-content-center"
+                *ngIf="loading"
+            >
+                <p-progressSpinner></p-progressSpinner>
+            </div>
+            <div class="mt-8" *ngIf="!loading">
+                <div class="card" *ngFor="let note of contact.notes">
+                    <div
+                        class="flex align-items-center justify-content-between mb-0"
+                    >
+                        <h5>
+                            {{
+                                note.title +
+                                    " - " +
+                                    contact.firstName +
+                                    " " +
+                                    contact.lastName
+                            }}
+                        </h5>
+                        <div
+                            class="flex align-items-center justify-content-center"
+                        >
+                            <p class="text-indigo-600 mr-5">
+                                {{ note.createdAt | date }}
+                            </p>
+                            <p-menu
+                                #menu
+                                [popup]="true"
+                                [model]="cardMenu"
+                            ></p-menu>
+                            <button
+                                pButton
+                                type="button"
+                                icon="pi pi-plus"
+                                class="p-button-text"
+                                (click)="menu.toggle($event)"
+                            ></button>
+                        </div>
+                    </div>
+                    <p>
+                        {{ note.note }}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -2,14 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MenuItem } from 'primeng/api';
-import { map, Observable } from 'rxjs';
 
 @Component({
-    selector: 'app-profile',
-    templateUrl: './profile.component.html',
-    styleUrls: ['./profile.component.scss'],
+    selector: 'app-create-lead',
+    templateUrl: './create-lead.component.html',
+    styleUrls: ['./create-lead.component.scss'],
 })
-export class ProfileComponent implements OnInit {
+export class CreateLeadComponent implements OnInit {
     items!: MenuItem[];
 
     activeMenu!: MenuItem;
@@ -23,6 +22,20 @@ export class ProfileComponent implements OnInit {
     loading = false;
 
     name: string = '';
+
+    selectedCountry: any = null;
+
+    countries: any = [];
+
+    /**Form data */
+    firstName = '';
+    lastName = '';
+    otherNames = '';
+    email = '';
+    country = '';
+    referral = '';
+    phoneNumber = '';
+    dataLoading = false;
 
     constructor(private http: HttpClient, private route: ActivatedRoute) {}
 
@@ -62,5 +75,9 @@ export class ProfileComponent implements OnInit {
                     contact.lastName || ''
                 } ${contact.otherNames || ''}`;
             });
+    }
+
+    onCreateLead() {
+        return;
     }
 }

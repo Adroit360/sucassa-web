@@ -1,3 +1,4 @@
+<p-toast></p-toast>
 <div class="grid">
     <div class="ml-auto my-2" (click)="addContactModal = true">
         <p-button
@@ -49,52 +50,81 @@
                 </ng-template>
                 <ng-template pTemplate="body" let-contact>
                     <tr>
-                        <td style="width: 35%; min-width: 7rem">
-                            {{
-                                contact.firstName +
-                                    " " +
-                                    contact.lastName +
-                                    " " +
-                                    (contact.otherName || "")
-                            }}
+                        <td
+                            style="width: 35%; min-width: 7rem"
+                            [routerLink]="['/profile', contact._id]"
+                        >
+                            {{ contact.title }} {{ contact.firstName || "" }}
+
+                            {{ contact.lastName || "" }}
+
+                            {{ contact.otherName || "" }}
                         </td>
-                        <td style="width: 35%; min-width: 8rem">
+                        <td
+                            style="width: 35%; min-width: 8rem"
+                            [routerLink]="['/profile', contact._id]"
+                        >
                             {{ contact.email }}
                         </td>
-                        <td style="width: 35%; min-width: 8rem">
+                        <td
+                            style="width: 35%; min-width: 8rem"
+                            [routerLink]="['/profile', contact._id]"
+                        >
                             {{ contact.phone }}
                         </td>
-                        <td style="width: 35%; min-width: 8rem">
+                        <td
+                            style="width: 35%; min-width: 8rem"
+                            [routerLink]="['/profile', contact._id]"
+                        >
                             {{ contact.country }}
                         </td>
-                        <td style="width: 35%; min-width: 8rem">
+                        <td
+                            style="width: 35%; min-width: 8rem"
+                            [routerLink]="['/profile', contact._id]"
+                        >
                             {{ contact.createdAt | date }}
                         </td>
-                        <td style="width: 35%; min-width: 8rem">
+                        <td
+                            style="width: 35%; min-width: 8rem"
+                            [routerLink]="['/profile', contact._id]"
+                        >
                             {{
                                 contact.user.firstName +
                                     " " +
                                     contact.user.lastName
                             }}
                         </td>
-                        <td style="width: 35%; min-width: 8rem">
+                        <td
+                            style="width: 35%; min-width: 8rem"
+                            [routerLink]="['/profile', contact._id]"
+                        >
                             {{ contact.status }}
                         </td>
 
                         <td style="width: 15%">
-                            <button
-                                (click)="
-                                    showContactDetails(
-                                        contact._id,
-                                        contact.status
-                                    )
-                                "
-                                pButton
-                                pRipple
-                                type="button"
-                                icon="pi pi-pencil"
-                                class="p-button text-white bg-blue-500 p-button-md p-component p-button-text p-button-icon-only"
-                            ></button>
+                            <div class="flex gap-2">
+                                <button
+                                    (click)="
+                                        showContactDetails(
+                                            contact._id,
+                                            contact.status
+                                        )
+                                    "
+                                    pButton
+                                    pRipple
+                                    type="button"
+                                    icon="pi pi-pencil"
+                                    class="p-button text-white bg-blue-500 p-button-md p-component p-button-text p-button-icon-only"
+                                ></button>
+                                <button
+                                    (click)="onChangeContactToLead(contact._id)"
+                                    pButton
+                                    pRipple
+                                    type="button"
+                                    icon="pi pi-sign-out"
+                                    class="p-button text-white bg-green-500 p-button-md p-component p-button-text p-button-icon-only"
+                                ></button>
+                            </div>
                         </td>
                     </tr>
                 </ng-template>
@@ -171,6 +201,14 @@
 >
     <div class="col-12">
         <div class="p-fluid p-formgrid grid">
+            <div class="field col-12 md:col-4">
+                <label htmlFor="state">Title</label>
+                <p-dropdown
+                    [options]="titles"
+                    [(ngModel)]="title"
+                    optionLabel="label"
+                ></p-dropdown>
+            </div>
             <div class="field col-12 md:col-4">
                 <label htmlFor="firstname2">Firstname</label>
                 <input
@@ -263,6 +301,7 @@
             (click)="onAddContact()"
             label="Submit"
             class="p-button-text"
+            [loading]="loading"
         ></p-button>
         <p-button (click)="displayModal = false" label="Cancel"></p-button>
     </ng-template>

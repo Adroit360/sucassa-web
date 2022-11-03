@@ -1,8 +1,11 @@
+import { AuthGuard } from './demo/gurads/auth.guard';
+import { LeadsComponent } from './demo/components/leads/leads.component';
 import { ProfileComponent } from './demo/components/profile/profile.component';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { NotfoundComponent } from './demo/components/notfound/notfound.component';
 import { AppLayoutComponent } from './layout/app.layout.component';
+import { CreateLeadComponent } from './demo/components/profile/leads/create-lead/create-lead.component';
 
 @NgModule({
     imports: [
@@ -11,6 +14,7 @@ import { AppLayoutComponent } from './layout/app.layout.component';
                 {
                     path: '',
                     component: AppLayoutComponent,
+                    canActivate: [AuthGuard],
                     children: [
                         {
                             path: '',
@@ -56,7 +60,16 @@ import { AppLayoutComponent } from './layout/app.layout.component';
                             (m) => m.LandingModule
                         ),
                 },
-                { path: 'profile/:id', component: ProfileComponent },
+                {
+                    path: 'profile/:id',
+                    component: ProfileComponent,
+                    canActivate: [AuthGuard],
+                },
+                {
+                    path: 'add-lead/:id',
+                    component: CreateLeadComponent,
+                    canActivate: [AuthGuard],
+                },
                 { path: 'notfound', component: NotfoundComponent },
                 { path: '**', redirectTo: '/notfound' },
             ],
