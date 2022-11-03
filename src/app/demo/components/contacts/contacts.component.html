@@ -49,7 +49,10 @@
                 </ng-template>
                 <ng-template pTemplate="body" let-contact>
                     <tr>
-                        <td style="width: 35%; min-width: 7rem">
+                        <td
+                            style="width: 35%; min-width: 7rem"
+                            [routerLink]="['/profile', contact._id]"
+                        >
                             {{
                                 contact.firstName +
                                     " " +
@@ -58,26 +61,44 @@
                                     (contact.otherName || "")
                             }}
                         </td>
-                        <td style="width: 35%; min-width: 8rem">
+                        <td
+                            style="width: 35%; min-width: 8rem"
+                            [routerLink]="['/profile', contact._id]"
+                        >
                             {{ contact.email }}
                         </td>
-                        <td style="width: 35%; min-width: 8rem">
+                        <td
+                            style="width: 35%; min-width: 8rem"
+                            [routerLink]="['/profile', contact._id]"
+                        >
                             {{ contact.phone }}
                         </td>
-                        <td style="width: 35%; min-width: 8rem">
+                        <td
+                            style="width: 35%; min-width: 8rem"
+                            [routerLink]="['/profile', contact._id]"
+                        >
                             {{ contact.country }}
                         </td>
-                        <td style="width: 35%; min-width: 8rem">
+                        <td
+                            style="width: 35%; min-width: 8rem"
+                            [routerLink]="['/profile', contact._id]"
+                        >
                             {{ contact.createdAt | date }}
                         </td>
-                        <td style="width: 35%; min-width: 8rem">
+                        <td
+                            style="width: 35%; min-width: 8rem"
+                            [routerLink]="['/profile', contact._id]"
+                        >
                             {{
                                 contact.user.firstName +
                                     " " +
                                     contact.user.lastName
                             }}
                         </td>
-                        <td style="width: 35%; min-width: 8rem">
+                        <td
+                            style="width: 35%; min-width: 8rem"
+                            [routerLink]="['/profile', contact._id]"
+                        >
                             {{ contact.status }}
                         </td>
 
