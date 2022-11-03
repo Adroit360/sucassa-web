@@ -16,6 +16,8 @@ import { InputTextModule } from 'primeng/inputtext';
 import { CalendarModule } from 'primeng/calendar';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputNumberModule } from 'primeng/inputnumber';
+import { SplitButtonModule } from 'primeng/splitbutton';
+import { ToastModule } from 'primeng/toast';
 
 @NgModule({
     declarations: [ContactsComponent],
@@ -35,6 +37,9 @@ import { InputNumberModule } from 'primeng/inputnumber';
         DropdownModule,
         InputNumberModule,
         InputTextareaModule,
+        ButtonModule,
+        SplitButtonModule,
+        ToastModule,
     ],
 })
 export class ContactsModule {}

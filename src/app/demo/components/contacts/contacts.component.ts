@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { MenuItem } from 'primeng/api';
+import { MenuItem, MessageService } from 'primeng/api';
 import { Subscription } from 'rxjs';
 import { LayoutService } from 'src/app/layout/service/app.layout.service';
 import { Product } from '../../api/product';
@@ -44,6 +44,10 @@ export class ContactsComponent implements OnInit {
 
     loading: boolean = false;
 
+    title: any;
+
+    titles: any[] = [];
+
     /**Form data */
     firstName = '';
     lastName = '';
@@ -57,7 +61,8 @@ export class ContactsComponent implements OnInit {
     constructor(
         private productService: ProductService,
         public layoutService: LayoutService,
-        private http: HttpClient
+        private http: HttpClient,
+        private messageService: MessageService
     ) {}
 
     ngOnInit() {
@@ -72,6 +77,12 @@ export class ContactsComponent implements OnInit {
             { label: 'On Hold', value: 'on-hold' },
             { label: 'Rejected', value: 'rejected' },
             { label: 'Pending', value: 'pending' },
+        ];
+
+        this.titles = [
+            { label: 'Mr', value: 'Mr' },
+            { label: 'Miss', value: 'Miss' },
+            { label: 'Mrs', value: 'Mrs' },
         ];
 
         this.http
@@ -129,6 +140,7 @@ export class ContactsComponent implements OnInit {
             otherName: this.otherNames,
             referral: this.referral,
             email: this.email,
+            title: this.title.value,
         };
 
         this.loading = true;
@@ -138,6 +150,11 @@ export class ContactsComponent implements OnInit {
                 if (res.success) {
                     this.addContactModal = false;
                     this.loading = false;
+                    this.messageService.add({
+                        severity: 'success',
+                        summary: 'Success',
+                        detail: 'User Added',
+                    });
                     this.onAllGetContacts();
                 }
             });
@@ -164,8 +181,25 @@ export class ContactsComponent implements OnInit {
                     this.contactNote = '';
                     this.invalidNote = false;
                     this.loading = false;
+                    this.messageService.add({
+                        severity: 'success',
+                        summary: 'Success',
+                        detail: 'Contact status Updated',
+                    });
                     this.onAllGetContacts();
                 }
+            });
+    }
+
+    onChangeContactToLead(id: string) {
+        this.http
+            .get(`https://sucasa-api.herokuapp.com/api/contact/${id}`)
+            .subscribe((res) => {
+                this.messageService.add({
+                    severity: 'success',
+                    summary: 'Success',
+                    detail: 'User Updated',
+                });
             });
     }
 }

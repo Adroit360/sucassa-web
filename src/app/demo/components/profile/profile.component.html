@@ -2,38 +2,59 @@
     <app-topbar></app-topbar>
     <div class="profile-container">
         <div class="h-full px-4 py-4 bg-white w-23rem">
-            <div
-                class="px-2 py-5 flex justify-content-center flex-column w-full text-center border-bottom-1 border-gray-500"
-            >
-                <ngx-avatar
-                    class="flex align-items-center justify-content-center"
-                    name="name"
-                    size="120"
-                ></ngx-avatar>
-                <h3>Name</h3>
-                <p>Phone</p>
-                <p>Email</p>
+            <div class="mt-8 h-full" *ngIf="loading">
+                <p-progressSpinner></p-progressSpinner>
             </div>
-            <div></div>
-            <div class="py-5">
-                <div class="flex justify-content-between">
-                    <p>Leads</p>
-                    <p></p>
+            <div *ngIf="!loading">
+                <div
+                    class="px-2 py-5 flex justify-content-center flex-column w-full text-center border-bottom-1 border-gray-500"
+                >
+                    <ngx-avatar
+                        class="flex align-items-center justify-content-center"
+                        [name]="name"
+                        size="120"
+                    ></ngx-avatar>
+                    <h3>{{ name }}</h3>
+                    <p>{{ contact.phone }} | {{ contact.country }}</p>
+                    <p>{{ contact.email }}</p>
                 </div>
-                <div class="flex justify-content-between">
-                    <p>Properties</p>
-                    <p></p>
-                </div>
-                <div class="flex justify-content-between">
-                    <p>Partnership</p>
-                    <p></p>
-                </div>
-                <div class="flex justify-content-between">
-                    <p>Bussines</p>
-                    <p></p>
+                <div></div>
+                <div class="py-5">
+                    <div
+                        class="flex py-2 my-2 align-items-center cursor-pointer justify-content-between"
+                        [routerLink]="['/add-lead', contact._id]"
+                    >
+                        <span>Leads</span>
+                        <i
+                            class="pi pi-angle-right"
+                            style="font-size: 2rem"
+                        ></i>
+                    </div>
+
+                    <div
+                        class="flex py-2 my-2 align-items-center cursor-pointer justify-content-between"
+                    >
+                        <span>Properties</span>
+                        <i
+                            class="pi pi-angle-right"
+                            style="font-size: 2rem"
+                        ></i>
+                    </div>
+
+                    <div
+                        class="flex py-2 my-2 align-items-center cursor-pointer justify-content-between"
+                    >
+                        <span>Partnership</span>
+                        <span>{{ contact.isPartnership }}</span>
+                    </div>
+                    <div
+                        class="flex py-2 my-2 align-items-center cursor-pointer justify-content-between"
+                    >
+                        <span>Business</span>
+                        <span>{{ contact.business }}</span>
+                    </div>
                 </div>
             </div>
-            <div></div>
         </div>
         <div class="h-full px-4 relative flex-1">
             <div class="absolute top-0 z-5">
@@ -43,7 +64,7 @@
                 ></p-tabMenu>
             </div>
             <div
-                class="mt-8 h-full flex align-items-center justify-content-center"
+                class="mt-8 h-full flex justify-content-center"
                 *ngIf="loading"
             >
                 <p-progressSpinner></p-progressSpinner>
@@ -89,6 +110,4 @@
             </div>
         </div>
     </div>
-
-    <div class="layout-mask"></div>
 </div>

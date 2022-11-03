@@ -13,6 +13,7 @@ import { IconService } from './demo/service/icon.service';
 import { NodeService } from './demo/service/node.service';
 import { PhotoService } from './demo/service/photo.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { MessageService } from 'primeng/api';
 
 @NgModule({
     declarations: [AppComponent, NotfoundComponent],
@@ -25,6 +26,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
         NodeService,
         PhotoService,
         ProductService,
+        MessageService,
         {
             provide: HTTP_INTERCEPTORS,
             useClass: TokenInterceptorService,
